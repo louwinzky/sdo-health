@@ -15,7 +15,7 @@ class StatsOverview extends StatsOverviewWidget
     protected function getStats(): array
     {
         $user = Auth::user();
-        $isSdoAdmin = $user->role === 'sdo_admin';
+        $isSdoAdmin = $user->hasRole('sdo_admin');
         $schoolId = $user->school_id;
 
         $stats = [];
@@ -31,7 +31,7 @@ class StatsOverview extends StatsOverviewWidget
         $recordQuery = HealthRecord::query();
         $programQuery = HealthProgram::query();
 
-        if (!$isSdoAdmin && $schoolId) {
+        if (! $isSdoAdmin && $schoolId) {
             $studentQuery->where('school_id', $schoolId);
             $recordQuery->whereHas('student', fn ($q) => $q->where('school_id', $schoolId));
             $programQuery->where('school_id', $schoolId);

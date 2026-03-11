@@ -1,0 +1,13 @@
+/* Custom Theme for Filament Admin Panel */
+
+/* Remove gap between sidebar and content */
+.filament-main-content {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Ensure the content area takes full width */
+.filament-layout-container {
+    max-width: 100% !important;
+}

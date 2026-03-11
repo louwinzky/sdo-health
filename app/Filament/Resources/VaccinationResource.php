@@ -9,18 +9,24 @@ use App\Filament\Resources\Vaccinations\Schemas\VaccinationForm;
 use App\Filament\Resources\Vaccinations\Tables\VaccinationsTable;
 use App\Models\Vaccination;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class VaccinationResource extends Resource
 {
     protected static ?string $model = Vaccination::class;
 
+    protected static ?string $policy = \App\Policies\VaccinationPolicy::class;
+
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-beaker';
+
+    protected static ?string $label = 'Vaccination';
+
+    protected static ?string $pluralLabel = 'Vaccinations';
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +49,6 @@ class VaccinationResource extends Resource
     {
         return [
             'index' => ListVaccinations::route('/'),
-            'create' => CreateVaccination::route('/create'),
-            'edit' => EditVaccination::route('/{record}/edit'),
         ];
     }
 }

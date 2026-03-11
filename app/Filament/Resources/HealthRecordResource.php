@@ -9,18 +9,24 @@ use App\Filament\Resources\HealthRecords\Schemas\HealthRecordForm;
 use App\Filament\Resources\HealthRecords\Tables\HealthRecordsTable;
 use App\Models\HealthRecord;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class HealthRecordResource extends Resource
 {
     protected static ?string $model = HealthRecord::class;
 
+    protected static ?string $policy = \App\Policies\HealthRecordPolicy::class;
+
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-heart';
+
+    protected static ?string $label = 'Health Record';
+
+    protected static ?string $pluralLabel = 'Health Records';
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +49,6 @@ class HealthRecordResource extends Resource
     {
         return [
             'index' => ListHealthRecords::route('/'),
-            'create' => CreateHealthRecord::route('/create'),
-            'edit' => EditHealthRecord::route('/{record}/edit'),
         ];
     }
 }

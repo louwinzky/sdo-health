@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SchoolCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,10 +19,12 @@ class School extends Model
         'email',
         'principal_name',
         'is_active',
+        'category',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'category' => SchoolCategory::class,
     ];
 
     public function students(): HasMany

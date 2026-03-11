@@ -9,18 +9,24 @@ use App\Filament\Resources\HealthPrograms\Schemas\HealthProgramForm;
 use App\Filament\Resources\HealthPrograms\Tables\HealthProgramsTable;
 use App\Models\HealthProgram;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class HealthProgramResource extends Resource
 {
     protected static ?string $model = HealthProgram::class;
 
+    protected static ?string $policy = \App\Policies\HealthProgramPolicy::class;
+
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clipboard-document-check';
+
+    protected static ?string $label = 'Health Program';
+
+    protected static ?string $pluralLabel = 'Health Programs';
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +49,6 @@ class HealthProgramResource extends Resource
     {
         return [
             'index' => ListHealthPrograms::route('/'),
-            'create' => CreateHealthProgram::route('/create'),
-            'edit' => EditHealthProgram::route('/{record}/edit'),
         ];
     }
 }

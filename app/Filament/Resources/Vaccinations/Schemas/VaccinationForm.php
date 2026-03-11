@@ -15,7 +15,10 @@ class VaccinationForm
         return $schema
             ->components([
                 Select::make('student_id')
-                    ->relationship('student', 'id')
+                    ->relationship('student')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->first_name} {$record->last_name} ({$record->lrn})")
+                    ->searchable(['first_name', 'last_name', 'lrn'])
+                    ->preload()
                     ->required(),
                 TextInput::make('vaccine_name')
                     ->required(),

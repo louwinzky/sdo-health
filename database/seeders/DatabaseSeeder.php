@@ -16,28 +16,33 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // 0. Create Roles and Permissions
+        $this->call(RolePermissionSeeder::class);
+
         $filipinoLastNames = ['Garcia', 'Santos', 'Reyes', 'Cruz', 'Bautista', 'Ocampo', 'Dela Cruz', 'Mendoza', 'Pascual', 'Castillo', 'Villanueva', 'Gonzales', 'Rivera', 'Aquino', 'Santiago'];
         $filipinoFirstNames = ['Jose', 'Maria', 'Juan', 'Angelo', 'Liza', 'Rene', 'Teresa', 'Antonio', 'Cristina', 'Ricardo', 'Elena', 'Roberto', 'Carmen', 'Francisco', 'Pilar'];
 
         // 1. Create SDO Admin
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'SDO Admin',
             'email' => 'admin@sdo.gov.ph',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Password'),
             'role' => 'sdo_admin',
         ]);
+        $admin->assignRole('sdo_admin');
 
         // 2. Create Schools and Users
         $schools = School::factory(5)->create();
 
         foreach ($schools as $school) {
             // Create Principal for the school
-            User::factory()->create([
+            $principal = User::factory()->create([
                 'name' => "Principal " . fake()->randomElement($filipinoFirstNames) . " " . fake()->randomElement($filipinoLastNames),
                 'email' => "principal." . strtolower(str_replace(' ', '', $school->name)) . "@example.com",
                 'role' => 'principal',
                 'school_id' => $school->id,
             ]);
+            $principal->assignRole('principal');
 
             // Create Health Coordinator for the school
             $coordinator = User::factory()->create([
@@ -46,6 +51,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'health_coordinator',
                 'school_id' => $school->id,
             ]);
+            $coordinator->assignRole('health_coordinator');
 
             // 3. Create Students and their records
             Student::factory(20)->create([

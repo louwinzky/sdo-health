@@ -15,27 +15,34 @@ class UsersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('NAME')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('EMAIL')
                     ->searchable(),
                 TextColumn::make('role')
+                    ->label('ROLE')
                     ->badge(),
                 TextColumn::make('email_verified_at')
+                    ->label('EMAIL VERIFIED AT')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('two_factor_confirmed_at')
+                    ->label('2FA CONFIRMED AT')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('CREATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('UPDATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('school.name')
+                    ->label('SCHOOL')
                     ->searchable(),
             ])
             ->filters([

@@ -18,6 +18,7 @@ class StudentForm
                     ->relationship('school', 'name')
                     ->required(),
                 TextInput::make('lrn')
+                    ->label('LRN')
                     ->required(),
                 TextInput::make('first_name')
                     ->required(),

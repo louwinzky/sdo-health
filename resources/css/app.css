@@ -64,3 +64,14 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+/* Custom CSS to fix Filament Admin Panel gap */
+.filament-main-content {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+}
+
+.filament-layout-container {
+    max-width: 100% !important;
+}

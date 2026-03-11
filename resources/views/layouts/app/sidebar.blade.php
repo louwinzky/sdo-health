@@ -4,44 +4,39 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+        <flux:sidebar sticky collapsible="mobile" class="w-72 border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.header>
-                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
+                <x-app-logo :sidebar="true" href="{{ route('filament.admin.pages.dashboard') }}" wire:navigate />
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('General')" class="grid">
-                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </flux:sidebar.item>
-                </flux:sidebar.group>
 
                 <flux:sidebar.group :heading="__('Management')" class="grid">
-                    <flux:sidebar.item icon="layout-grid" href="/admin" :current="request()->is('admin')">
+                    <flux:sidebar.item icon="layout-grid" href="{{ route('filament.admin.pages.dashboard') }}" :current="request()->routeIs('filament.admin.pages.dashboard')">
                         {{ __('Admin Panel') }}
                     </flux:sidebar.item>
-                    @if(auth()->user()->role === 'sdo_admin')
-                        <flux:sidebar.item icon="school" href="/admin/schools" :current="request()->is('admin/schools*')">
+                    @if(auth()->user()->hasRole('sdo_admin'))
+                        <flux:sidebar.item icon="school" href="{{ route('filament.admin.resources.schools.index') }}" :current="request()->routeIs('filament.admin.resources.schools.index')">
                             {{ __('Schools') }}
                         </flux:sidebar.item>
                     @endif
                 </flux:sidebar.group>
 
                 <flux:sidebar.group :heading="__('Health Data')" class="grid">
-                    <flux:sidebar.item icon="users" href="/admin/students" :current="request()->is('admin/students*')">
+                    <flux:sidebar.item icon="users" href="{{ route('filament.admin.resources.students.index') }}" :current="request()->routeIs('filament.admin.resources.students.index')">
                         {{ __('Students') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="heart" href="/admin/health-records" :current="request()->is('admin/health-records*')">
+                    <flux:sidebar.item icon="heart" href="{{ route('filament.admin.resources.health-records.index') }}" :current="request()->routeIs('filament.admin.resources.health-records.index')">
                         {{ __('Health Records') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="beaker" href="/admin/vaccinations" :current="request()->is('admin/vaccinations*')">
+                    <flux:sidebar.item icon="beaker" href="{{ route('filament.admin.resources.vaccinations.index') }}" :current="request()->routeIs('filament.admin.resources.vaccinations.index')">
                         {{ __('Vaccinations') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="calendar" href="/admin/absences" :current="request()->is('admin/absences*')">
+                    <flux:sidebar.item icon="calendar" href="{{ route('filament.admin.resources.absences.index') }}" :current="request()->routeIs('filament.admin.resources.absences.index')">
                         {{ __('Absences') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="clipboard-list" href="/admin/health-programs" :current="request()->is('admin/health-programs*')">
+                    <flux:sidebar.item icon="clipboard-list" href="{{ route('filament.admin.resources.health-programs.index') }}" :current="request()->routeIs('filament.admin.resources.health-programs.index')">
                         {{ __('Programs') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>

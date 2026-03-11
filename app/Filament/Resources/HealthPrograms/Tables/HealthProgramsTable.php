@@ -5,6 +5,8 @@ namespace App\Filament\Resources\HealthPrograms\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -13,30 +15,41 @@ class HealthProgramsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->recordAction(ViewAction::class)
             ->columns([
                 TextColumn::make('school.name')
+                    ->label('SCHOOL')
                     ->searchable(),
                 TextColumn::make('name')
+                    ->label('NAME')
                     ->searchable(),
                 TextColumn::make('type')
+                    ->label('TYPE')
                     ->badge(),
                 TextColumn::make('start_date')
+                    ->label('START DATE')
                     ->date()
                     ->sortable(),
                 TextColumn::make('end_date')
+                    ->label('END DATE')
                     ->date()
                     ->sortable(),
                 TextColumn::make('target_grade')
+                    ->label('TARGET GRADE')
                     ->badge(),
                 TextColumn::make('status')
+                    ->label('STATUS')
                     ->badge(),
                 TextColumn::make('coordinator.name')
+                    ->label('COORDINATOR')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('CREATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('UPDATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -45,6 +58,11 @@ class HealthProgramsTable
                 //
             ])
             ->recordActions([
+                ViewAction::make()
+                    ->extraModalFooterActions([
+                        EditAction::make()
+                            ->cancelParentActions(),
+                    ]),
                 EditAction::make(),
             ])
             ->toolbarActions([

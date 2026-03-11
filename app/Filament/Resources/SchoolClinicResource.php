@@ -9,10 +9,10 @@ use App\Filament\Resources\SchoolClinics\Schemas\SchoolClinicForm;
 use App\Filament\Resources\SchoolClinics\Tables\SchoolClinicsTable;
 use App\Models\SchoolClinic;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SchoolClinicResource extends Resource
 {
@@ -21,6 +21,10 @@ class SchoolClinicResource extends Resource
     protected static UnitEnum|string|null $navigationGroup = 'School Management';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-building-office-2';
+
+    protected static ?string $label = 'School Clinic';
+
+    protected static ?string $pluralLabel = 'School Clinics';
 
     public static function form(Schema $schema): Schema
     {

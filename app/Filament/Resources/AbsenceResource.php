@@ -9,18 +9,24 @@ use App\Filament\Resources\Absences\Schemas\AbsenceForm;
 use App\Filament\Resources\Absences\Tables\AbsencesTable;
 use App\Models\Absence;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class AbsenceResource extends Resource
 {
     protected static ?string $model = Absence::class;
 
+    protected static ?string $policy = \App\Policies\AbsencePolicy::class;
+
     protected static UnitEnum|string|null $navigationGroup = 'Student Management';
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar-days';
+
+    protected static ?string $label = 'Absence';
+
+    protected static ?string $pluralLabel = 'Absences';
 
     public static function form(Schema $schema): Schema
     {
@@ -43,8 +49,6 @@ class AbsenceResource extends Resource
     {
         return [
             'index' => ListAbsences::route('/'),
-            'create' => CreateAbsence::route('/create'),
-            'edit' => EditAbsence::route('/{record}/edit'),
         ];
     }
 }

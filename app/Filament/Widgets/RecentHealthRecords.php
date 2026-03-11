@@ -13,19 +13,19 @@ class RecentHealthRecords extends TableWidget
 {
     protected static ?int $sort = 2;
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table
     {
         $user = Auth::user();
-        $isSdoAdmin = $user->role === 'sdo_admin';
+        $isSdoAdmin = $user->hasRole('sdo_admin');
         $schoolId = $user->school_id;
 
         return $table
             ->query(
                 HealthRecord::query()
                     ->latest()
-                    ->when(!$isSdoAdmin && $schoolId, function (Builder $query) use ($schoolId) {
+                    ->when(! $isSdoAdmin && $schoolId, function (Builder $query) use ($schoolId) {
                         $query->whereHas('student', fn ($q) => $q->where('school_id', $schoolId));
                     })
                     ->limit(10)
