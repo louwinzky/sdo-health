@@ -51,7 +51,8 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            \App\Filament\Resources\Students\RelationManagers\HealthRecordsRelationManager::class,
+            \App\Filament\Resources\Students\RelationManagers\VaccinationsRelationManager::class,
         ];
     }
 

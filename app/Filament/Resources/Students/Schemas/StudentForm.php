@@ -23,6 +23,7 @@ class StudentForm
                     ->label('LRN')
                     ->required(),
                 TextInput::make('first_name')
+                    ->label('Name')
                     ->required(),
                 TextInput::make('middle_name'),
                 TextInput::make('last_name')
@@ -32,14 +33,6 @@ class StudentForm
                     ->required(),
                 Select::make('sex')
                     ->options(['male' => 'Male', 'female' => 'Female'])
-                    ->required(),
-                TextInput::make('address')
-                    ->required(),
-                TextInput::make('guardian_name')
-                    ->required(),
-                TextInput::make('guardian_contact')
-                    ->required(),
-                TextInput::make('guardian_relationship')
                     ->required(),
                 Toggle::make('is_active')
                     ->required(),

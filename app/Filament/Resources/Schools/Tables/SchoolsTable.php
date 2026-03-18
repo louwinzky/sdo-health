@@ -19,6 +19,10 @@ class SchoolsTable
         return $table
             ->recordAction(ViewAction::class)
             ->columns([
+                TextColumn::make('school_id')
+                    ->label('School ID')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('name')
                     ->label('NAME')
                     ->searchable(),
