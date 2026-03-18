@@ -10,6 +10,7 @@ use App\Filament\Resources\SchoolClinicResource;
 use App\Filament\Resources\SchoolResource;
 use App\Filament\Resources\StudentResource;
 use App\Filament\Resources\VaccinationResource;
+use App\Http\Middleware\RedirectIfUnapproved;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -65,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                RedirectIfUnapproved::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

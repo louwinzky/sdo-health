@@ -5,6 +5,8 @@ namespace App\Actions\Fortify;
 use App\Concerns\PasswordValidationRules;
 use App\Concerns\ProfileValidationRules;
 use App\Models\User;
+use App\Notifications\NewUserWaitingApproval;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Spatie\Permission\Models\Role;
@@ -40,6 +42,10 @@ class CreateNewUser implements CreatesNewUsers
             $role = Role::create(['name' => 'health_coordinator']);
         }
         $user->assignRole($role);
+
+        // Notify SDO Admins that a new user is waiting for approval
+        $admins = User::role('sdo_admin')->get();
+        Notification::send($admins, new NewUserWaitingApproval($user));
 
         return $user;
     }

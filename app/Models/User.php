@@ -85,16 +85,17 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        // Only allow users with admin roles to access the admin panel
+        // Only allow users with specific roles to access the admin panel
         if ($panel->getId() === 'admin') {
-            // SDO Admins always have access if verified (or skip verification for initial setup if needed)
-            if ($this->hasRole('sdo_admin')) {
-                return $this->email_verified_at !== null;
+            // Check if user is verified
+            if ($this->email_verified_at === null) {
+                return false;
             }
 
-            return $this->email_verified_at !== null
-                && $this->is_approved === true
-                && ($this->hasRole('health_coordinator') || $this->hasRole('principal'));
+            // Roles allowed to access the panel (Approved or not, handled by middleware)
+            return $this->hasRole('sdo_admin')
+                || $this->hasRole('health_coordinator')
+                || $this->hasRole('principal');
         }
 
         return true;

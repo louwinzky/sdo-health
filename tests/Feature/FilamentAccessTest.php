@@ -17,7 +17,7 @@ beforeEach(function () {
     Role::create(['name' => 'principal']);
 });
 
-test('unapproved user cannot access filament admin panel', function () {
+test('unapproved user is redirected from filament admin panel', function () {
     $user = User::factory()->create([
         'is_approved' => false,
         'email_verified_at' => now(),
@@ -26,7 +26,7 @@ test('unapproved user cannot access filament admin panel', function () {
 
     actingAs($user)
         ->get('/admin')
-        ->assertForbidden();
+        ->assertRedirect(route('pending-approval'));
 });
 
 test('unverified user cannot access filament admin panel', function () {
