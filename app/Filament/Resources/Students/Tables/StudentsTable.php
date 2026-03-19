@@ -18,40 +18,31 @@ class StudentsTable
                 TextColumn::make('lrn')
                     ->label('LRN')
                     ->searchable(),
-                TextColumn::make('name')
-                    ->formatStateUsing(function ($state, $record) {
-                        $name = $record->first_name;
-                        if ($record->middle_name) {
-                            $name .= ' ' . $record->middle_name;
-                        }
-                        if ($record->last_name) {
-                            $name .= ' ' . $record->last_name;
-                        }
-                        if ($record->suffix) {
-                            $name .= ' ' . $record->suffix;
-                        }
-                        return $name;
-                    })
-                    ->searchable(query: function ($query, $search) {
-                        return $query->where('first_name', 'like', "%{$search}%")
-                            ->orWhere('middle_name', 'like', "%{$search}%")
-                            ->orWhere('last_name', 'like', "%{$search}%");
-                    }),
+                TextColumn::make('first_name')
+                    ->label('NAME')
+                    ->formatStateUsing(fn ($record) => $record->full_name)
+                    ->searchable(['first_name', 'middle_name', 'last_name'])
+                    ->sortable(),
                 TextColumn::make('school.name')
-                    ->label('School')
+                    ->label('SCHOOL')
                     ->searchable(),
                 TextColumn::make('birth_date')
+                    ->label('BIRTH DATE')
                     ->date()
                     ->sortable(),
                 TextColumn::make('sex')
+                    ->label('SEX')
                     ->badge(),
                 IconColumn::make('is_active')
+                    ->label('IS ACTIVE')
                     ->boolean(),
                 TextColumn::make('created_at')
+                    ->label('CREATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('UPDATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

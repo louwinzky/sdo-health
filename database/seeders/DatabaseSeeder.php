@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Absence;
+use App\Models\HealthProgram;
+use App\Models\HealthRecord;
 use App\Models\School;
 use App\Models\Student;
-use App\Models\HealthRecord;
-use App\Models\HealthProgram;
+use App\Models\User;
 use App\Models\Vaccination;
-use App\Models\Absence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // 0. Create Roles and Permissions
+        $this->call(RolePermissionSeeder::class);
+
         // 1. Seed all schools first
         $this->call(SchoolSeeder::class);
 
@@ -23,39 +26,45 @@ class DatabaseSeeder extends Seeder
         $filipinoFirstNames = ['Jose', 'Maria', 'Juan', 'Angelo', 'Liza', 'Rene', 'Teresa', 'Antonio', 'Cristina', 'Ricardo', 'Elena', 'Roberto', 'Carmen', 'Francisco', 'Pilar'];
 
         // 2. Create SDO Admin
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'SDO Admin',
             'email' => 'admin@sdo.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'sdo_admin',
+            'is_approved' => true,
         ]);
+        $admin->assignRole('sdo_admin');
 
         // 3. Get all schools from the seeder
         $schools = School::all();
 
         foreach ($schools as $school) {
             // Create Principal for the school
-            User::factory()->create([
-                'name' => "Principal " . fake()->randomElement($filipinoFirstNames) . " " . fake()->randomElement($filipinoLastNames),
-                'email' => "principal." . $school->id . "@example.com",
+            $principal = User::factory()->create([
+                'name' => 'Principal '.fake()->randomElement($filipinoFirstNames).' '.fake()->randomElement($filipinoLastNames),
+                'email' => 'principal.'.$school->id.'@example.com',
                 'role' => 'principal',
                 'school_id' => $school->id,
+                'is_approved' => true,
             ]);
+            $principal->assignRole('principal');
 
             // Create Health Coordinator for the school
             $coordinator = User::factory()->create([
-                'name' => "Nurse " . fake()->randomElement($filipinoFirstNames) . " " . fake()->randomElement($filipinoLastNames),
-                'email' => "nurse." . $school->id . "@example.com",
+                'name' => 'Nurse '.fake()->randomElement($filipinoFirstNames).' '.fake()->randomElement($filipinoLastNames),
+                'email' => 'nurse.'.$school->id.'@example.com',
                 'role' => 'health_coordinator',
                 'school_id' => $school->id,
+                'is_approved' => true,
             ]);
+            $coordinator->assignRole('health_coordinator');
 
             // 3. Create Students and their records
             Student::factory(20)->create([
                 'school_id' => $school->id,
-                'first_name' => fn() => fake()->randomElement($filipinoFirstNames),
-                'last_name' => fn() => fake()->randomElement($filipinoLastNames),
-                'guardian_name' => fn() => fake()->randomElement($filipinoFirstNames) . " " . fake()->randomElement($filipinoLastNames),
+                'first_name' => fn () => fake()->randomElement($filipinoFirstNames),
+                'last_name' => fn () => fake()->randomElement($filipinoLastNames),
+                'guardian_name' => fn () => fake()->randomElement($filipinoFirstNames).' '.fake()->randomElement($filipinoLastNames),
             ])->each(function ($student) use ($coordinator) {
                 // Add Health Records
                 HealthRecord::factory(rand(1, 3))->create([

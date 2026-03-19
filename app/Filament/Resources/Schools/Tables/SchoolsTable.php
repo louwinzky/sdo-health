@@ -20,7 +20,7 @@ class SchoolsTable
             ->recordAction(ViewAction::class)
             ->columns([
                 TextColumn::make('school_id')
-                    ->label('School ID')
+                    ->label('SCHOOL ID')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('name')
@@ -31,10 +31,8 @@ class SchoolsTable
                     ->searchable(),
                 TextColumn::make('category')
                     ->label('CATEGORY')
-                    ->badge(),
-                TextColumn::make('level')
-                    ->label('LEVEL')
-                    ->badge(),
+                    ->badge()
+                    ->searchable(),
                 TextColumn::make('contact_number')
                     ->label('CONTACT NUMBER')
                     ->searchable(),

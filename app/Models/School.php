@@ -15,7 +15,6 @@ class School extends Model
         'school_id',
         'name',
         'address',
-        'level',
         'contact_number',
         'email',
         'principal_name',
