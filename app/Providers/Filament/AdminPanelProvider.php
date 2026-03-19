@@ -38,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->favicon('https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png')
             ->brandName('SDO Legazpi Health System')
             ->brandLogo('https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png')
-            ->brandLogoHeight('2.5rem')
+            ->brandLogoHeight('3.0rem')
             ->colors([
                 'primary' => Color::Amber,
             ])
