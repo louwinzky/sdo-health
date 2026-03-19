@@ -39,6 +39,14 @@ class HealthRecordsTable
                     ->sortable(),
                 TextColumn::make('bmi_category')
                     ->label('CATEGORY')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Underweight' => 'warning',
+                        'Normal' => 'success',
+                        'Overweight' => 'warning',
+                        'Obese' => 'danger',
+                        default => 'gray',
+                    })
                     ->searchable(),
                 TextColumn::make('recordedBy.name')
                     ->label('RECORDED BY')
