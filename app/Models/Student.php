@@ -57,6 +57,11 @@ class Student extends Model
         return $this->hasMany(ProgramParticipation::class);
     }
 
+    public function medicalHistory(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(MedicalHistory::class);
+    }
+
     public function getFullNameAttribute(): string
     {
         return trim("{$this->first_name} {$this->middle_name} {$this->last_name} {$this->suffix}");

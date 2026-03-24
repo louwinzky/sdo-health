@@ -7,9 +7,11 @@ use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Resources\RelationManagers\RelationManager;
+use App\Filament\Resources\Vaccinations\Schemas\VaccinationForm;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class VaccinationsRelationManager extends RelationManager
 {
@@ -18,6 +20,27 @@ class VaccinationsRelationManager extends RelationManager
     public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
     {
         return 'Vaccination Records';
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        VaccinationForm::configure($schema);
+
+        // Hide student_id and set default as it's already linked
+        $studentIdField = $schema->getComponent('student_id');
+        if ($studentIdField) {
+            $studentIdField->hidden()
+                ->default(fn (RelationManager $livewire) => $livewire->getOwnerRecord()->id);
+        }
+
+        // Auto-fill recorded_by with current user and hide it
+        $recordedByField = $schema->getComponent('recorded_by');
+        if ($recordedByField) {
+            $recordedByField->hidden()
+                ->default(auth()->id());
+        }
+
+        return $schema;
     }
 
     public function table(Table $table): Table
