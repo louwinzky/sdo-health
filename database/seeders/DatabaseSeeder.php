@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // 0. Create Roles and Permissions
+        $this->call(RolePermissionSeeder::class);
+
         // 1. Seed all schools first
         $this->call(SchoolSeeder::class);
 
@@ -23,24 +26,28 @@ class DatabaseSeeder extends Seeder
         $filipinoFirstNames = ['Jose', 'Maria', 'Juan', 'Angelo', 'Liza', 'Rene', 'Teresa', 'Antonio', 'Cristina', 'Ricardo', 'Elena', 'Roberto', 'Carmen', 'Francisco', 'Pilar'];
 
         // 2. Create SDO Admin
-        User::factory()->create([
+        $sdoAdmin = User::factory()->create([
             'name' => 'SDO Admin',
             'email' => 'admin@sdo.gov.ph',
             'password' => Hash::make('password'),
             'role' => 'sdo_admin',
+            'is_approved' => true,
         ]);
+        $sdoAdmin->assignRole('sdo_admin');
 
         // 3. Get all schools from the seeder
         $schools = School::all();
 
         foreach ($schools as $school) {
             // Create Principal for the school
-            User::factory()->create([
+            $principal = User::factory()->create([
                 'name' => "Principal " . fake()->randomElement($filipinoFirstNames) . " " . fake()->randomElement($filipinoLastNames),
                 'email' => "principal." . $school->id . "@example.com",
                 'role' => 'principal',
                 'school_id' => $school->id,
+                'is_approved' => true,
             ]);
+            $principal->assignRole('principal');
 
             // Create Health Coordinator for the school
             $coordinator = User::factory()->create([
@@ -48,7 +55,9 @@ class DatabaseSeeder extends Seeder
                 'email' => "nurse." . $school->id . "@example.com",
                 'role' => 'health_coordinator',
                 'school_id' => $school->id,
+                'is_approved' => true,
             ]);
+            $coordinator->assignRole('health_coordinator');
 
             // 3. Create Students and their records
             Student::factory(20)->create([
