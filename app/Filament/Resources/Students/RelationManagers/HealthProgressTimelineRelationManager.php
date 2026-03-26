@@ -17,6 +17,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 
 class HealthProgressTimelineRelationManager extends RelationManager
 {
@@ -141,6 +142,7 @@ class HealthProgressTimelineRelationManager extends RelationManager
             ->headerActions([
                 CreateAction::make()
                     ->label('New Health Examination')
+                    ->modalDescription(new HtmlString('<span style="font-size: 0.75rem; color: #9ca3af; font-weight: 300;">Some fields are pre-filled from the previous examination.</span>'))
                     ->fillForm(fn (RelationManager $livewire): array => $this->getAutoFillData($livewire->getOwnerRecord(), $lastExam))
                     ->mutateFormDataUsing(fn (array $data): array => [
                         ...$data,

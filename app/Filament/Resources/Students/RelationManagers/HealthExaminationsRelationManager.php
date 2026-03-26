@@ -13,6 +13,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class HealthExaminationsRelationManager extends RelationManager
 {
@@ -93,6 +94,7 @@ class HealthExaminationsRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make()
+                    ->modalDescription(new HtmlString('<span style="font-size: 0.75rem; color: #9ca3af; font-weight: 300;">Some fields are pre-filled from the previous examination.</span>'))
                     ->fillForm(fn (RelationManager $livewire): array => $this->getAutoFillData($livewire->getOwnerRecord()))
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['examined_by'] = auth()->id();
