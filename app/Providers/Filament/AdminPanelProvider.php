@@ -46,7 +46,6 @@ class AdminPanelProvider extends PanelProvider
             ->resources([
                 SchoolResource::class,
                 StudentResource::class,
-                HealthRecordResource::class,
                 VaccinationResource::class,
                 SchoolClinicResource::class,
                 HealthProgramResource::class,
