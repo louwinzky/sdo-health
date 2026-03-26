@@ -17,6 +17,7 @@ use App\Filament\Resources\VaccinationResource;
 use App\Filament\Resources\SchoolClinicResource;
 use App\Filament\Resources\HealthProgramResource;
 use App\Filament\Resources\AbsenceResource;
+use App\Filament\Resources\RolePermissionResource;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -50,6 +51,7 @@ class AdminPanelProvider extends PanelProvider
                 SchoolClinicResource::class,
                 HealthProgramResource::class,
                 AbsenceResource::class,
+                RolePermissionResource::class,
             ])
             ->widgets([
                 //AccountWidget::class,

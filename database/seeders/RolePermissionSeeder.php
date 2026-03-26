@@ -70,12 +70,12 @@ class RolePermissionSeeder extends Seeder
 
         // Assign roles to existing users based on their current role column
         $sdo_admins = User::where('role', 'sdo_admin')->get();
-        $sdo_admins->each(fn($user) => $user->assignRole($sdoAdminRole));
+        $sdo_admins->each(fn(User $user) => $user->assignRole($sdoAdminRole));
 
         $health_coordinators = User::where('role', 'health_coordinator')->get();
-        $health_coordinators->each(fn($user) => $user->assignRole($healthCoordinatorRole));
+        $health_coordinators->each(fn(User $user) => $user->assignRole($healthCoordinatorRole));
 
         $principals = User::where('role', 'principal')->get();
-        $principals->each(fn($user) => $user->assignRole($principalRole));
+        $principals->each(fn(User $user) => $user->assignRole($principalRole));
     }
 }

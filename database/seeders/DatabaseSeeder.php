@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'sdo_admin',
             'is_approved' => true,
+            'email_verified_at' => now(),
         ]);
         $sdoAdmin->assignRole('sdo_admin');
 
