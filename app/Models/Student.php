@@ -25,6 +25,7 @@ class Student extends Model
         'guardian_contact',
         'guardian_relationship',
         'is_active',
+        'current_grade_level',
     ];
 
     protected $casts = [
@@ -35,11 +36,6 @@ class Student extends Model
     public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
-    }
-
-    public function healthRecords(): HasMany
-    {
-        return $this->hasMany(HealthRecord::class);
     }
 
     public function vaccinations(): HasMany
@@ -55,6 +51,16 @@ class Student extends Model
     public function programParticipations(): HasMany
     {
         return $this->hasMany(ProgramParticipation::class);
+    }
+
+    public function medicalHistory(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(MedicalHistory::class);
+    }
+
+    public function healthExaminations(): HasMany
+    {
+        return $this->hasMany(HealthExamination::class);
     }
 
     public function getFullNameAttribute(): string

@@ -2,15 +2,16 @@
 
 namespace App\Filament\Resources\Students\RelationManagers;
 
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use App\Filament\Resources\Vaccinations\Schemas\VaccinationForm;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Actions;
-use Filament\Actions\CreateAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class VaccinationsRelationManager extends RelationManager
 {
@@ -21,10 +22,30 @@ class VaccinationsRelationManager extends RelationManager
         return 'Vaccination Records';
     }
 
+    public function form(Schema $schema): Schema
+    {
+        VaccinationForm::configure($schema);
+
+        // Hide student_id and set default as it's already linked
+        $studentIdField = $schema->getComponent('student_id');
+        if ($studentIdField) {
+            $studentIdField->hidden()
+                ->default(fn (RelationManager $livewire) => $livewire->getOwnerRecord()->id);
+        }
+
+        // Auto-fill recorded_by with current user and hide it
+        $recordedByField = $schema->getComponent('recorded_by');
+        if ($recordedByField) {
+            $recordedByField->hidden()
+                ->default(auth()->id());
+        }
+
+        return $schema;
+    }
+
     public function table(Table $table): Table
     {
         return $table
-            ->recordsTitleAttribute('vaccine_name')
             ->columns([
                 Tables\Columns\TextColumn::make('vaccine_name')
                     ->label('Vaccine')
@@ -51,8 +72,10 @@ class VaccinationsRelationManager extends RelationManager
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->toolbarActions([
+            ->headerActions([
                 CreateAction::make(),
+            ])
+            ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

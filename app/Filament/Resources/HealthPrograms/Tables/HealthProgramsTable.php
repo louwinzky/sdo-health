@@ -15,20 +15,27 @@ class HealthProgramsTable
         return $table
             ->columns([
                 TextColumn::make('school.name')
+                    ->label('SCHOOL')
                     ->searchable(),
                 TextColumn::make('name')
+                    ->label('NAME')
                     ->searchable(),
                 TextColumn::make('type')
+                    ->label('TYPE')
                     ->badge(),
                 TextColumn::make('start_date')
+                    ->label('START DATE')
                     ->date()
                     ->sortable(),
                 TextColumn::make('end_date')
+                    ->label('END DATE')
                     ->date()
                     ->sortable(),
                 TextColumn::make('target_grade')
+                    ->label('TARGET GRADE')
                     ->badge(),
                 TextColumn::make('status')
+                    ->label('STATUS')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'completed' => 'success',
@@ -38,15 +45,19 @@ class HealthProgramsTable
                         default => 'secondary',
                     }),
                 TextColumn::make('remarks')
+                    ->label('REMARKS')
                     ->limit(50)
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('coordinator.name')
+                    ->label('COORDINATOR')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('CREATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('UPDATED AT')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -57,7 +68,7 @@ class HealthProgramsTable
             ->recordActions([
                 EditAction::make(),
             ])
-            ->toolbarActions([
+            ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

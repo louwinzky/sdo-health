@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Schools\Schemas;
 
+use App\Enums\SchoolCategory;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -21,8 +22,13 @@ class SchoolForm
                     ->required(),
                 TextInput::make('address')
                     ->required(),
-                Select::make('level')
-                    ->options(['elementary' => 'Elementary', 'jhs' => 'Jhs', 'shs' => 'Shs', 'integrated' => 'Integrated'])
+                Select::make('category')
+                    ->options([
+                        SchoolCategory::ELEMENTARY->value => SchoolCategory::ELEMENTARY->label(),
+                        SchoolCategory::JUNIOR_HIGH->value => SchoolCategory::JUNIOR_HIGH->label(),
+                        SchoolCategory::SENIOR_HIGH->value => SchoolCategory::SENIOR_HIGH->label(),
+                        SchoolCategory::OTHER->value => SchoolCategory::OTHER->label(),
+                    ])
                     ->required(),
                 TextInput::make('contact_number'),
                 TextInput::make('email')

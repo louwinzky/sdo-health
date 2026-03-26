@@ -9,10 +9,10 @@ use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UserResource extends Resource
 {
@@ -23,6 +23,15 @@ class UserResource extends Resource
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationLabel = 'Personnel & Coordinators';
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->hasRole('sdo_admin');
+    }
+
+    protected static ?string $label = 'Personnel';
+
+    protected static ?string $pluralLabel = 'Personnel & Coordinators';
 
     public static function form(Schema $schema): Schema
     {

@@ -13,6 +13,7 @@ new #[Title('Profile settings')] class extends Component {
 
     public string $name = '';
     public string $email = '';
+    public ?int $school_id = null;
 
     /**
      * Mount the component.
@@ -21,6 +22,7 @@ new #[Title('Profile settings')] class extends Component {
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->school_id = Auth::user()->school_id;
     }
 
     /**
@@ -51,7 +53,7 @@ new #[Title('Profile settings')] class extends Component {
         $user = Auth::user();
 
         if ($user->hasVerifiedEmail()) {
-            $this->redirectIntended(default: route('dashboard', absolute: false));
+            $this->redirectIntended(default: route('filament.admin.pages.dashboard', absolute: false));
 
             return;
         }
