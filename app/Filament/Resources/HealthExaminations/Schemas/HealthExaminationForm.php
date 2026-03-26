@@ -9,6 +9,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class HealthExaminationForm
@@ -62,12 +64,16 @@ class HealthExaminationForm
                             ->label('Height')
                             ->numeric()
                             ->suffix('cm')
-                            ->required(),
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Get $get, Set $set) => self::calculateBmi($get, $set)),
                         TextInput::make('weight_kg')
                             ->label('Weight')
                             ->numeric()
                             ->suffix('kg')
-                            ->required(),
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Get $get, Set $set) => self::calculateBmi($get, $set)),
                         Select::make('ns_bmi_for_age')
                             ->label('BMI-for-Age')
                             ->options($map['ns_bmi'])
@@ -93,9 +99,10 @@ class HealthExaminationForm
                         Checkbox::make('iron_supplementation')
                             ->label('Iron Supplementation'),
                         TextInput::make('immunization_kind')
-                            ->label('Immunization Kind'),
+                            ->label('Immunization Kind')
+                            ->columnSpanFull(),
                     ])
-                    ->columns(3),
+                    ->columns(2),
 
                 // Section 4: Vitals & Development
                 Section::make('Vitals & Development')
@@ -158,10 +165,41 @@ class HealthExaminationForm
                 // Section 7: Others
                 Section::make('Others')
                     ->schema([
+                        Textarea::make('medications')
+                            ->label('Medications')
+                            ->rows(3),
                         Textarea::make('others_specify')
                             ->label('Others/Specify')
-                            ->columnSpanFull(),
-                    ]),
+                            ->rows(3),
+                    ])
+                    ->columns(1),
             ]);
+    }
+
+    public static function calculateBmi(Get $get, Set $set): void
+    {
+        $height = $get('height_cm');
+        $weight = $get('weight_kg');
+
+        if (! $height || ! $weight) {
+            return;
+        }
+
+        $heightInMeters = $height / 100;
+        $bmi = $weight / ($heightInMeters * $heightInMeters);
+
+        // Map BMI to ns_bmi_for_age (Simplified standard mapping)
+        // a: Normal Weight, c: Severely Wasted/Underweight, d: Overweight, e: Obese
+        $category = 'a'; // Normal
+
+        if ($bmi < 18.5) {
+            $category = 'c'; // Underweight
+        } elseif ($bmi >= 25 && $bmi < 30) {
+            $category = 'd'; // Overweight
+        } elseif ($bmi >= 30) {
+            $category = 'e'; // Obese
+        }
+
+        $set('ns_bmi_for_age', $category);
     }
 }

@@ -54,9 +54,8 @@ class StudentResource extends Resource
     {
         return [
             \App\Filament\Resources\Students\RelationManagers\MedicalHistoryRelationManager::class,
-            \App\Filament\Resources\Students\RelationManagers\HealthRecordsRelationManager::class,
-            \App\Filament\Resources\Students\RelationManagers\VaccinationsRelationManager::class,
             \App\Filament\Resources\Students\RelationManagers\HealthExaminationsRelationManager::class,
+            \App\Filament\Resources\Students\RelationManagers\VaccinationsRelationManager::class,
         ];
     }
 

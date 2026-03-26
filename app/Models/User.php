@@ -48,11 +48,6 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(School::class);
     }
 
-    public function healthRecords(): HasMany
-    {
-        return $this->hasMany(HealthRecord::class, 'recorded_by');
-    }
-
     public function vaccinations(): HasMany
     {
         return $this->hasMany(Vaccination::class, 'recorded_by');

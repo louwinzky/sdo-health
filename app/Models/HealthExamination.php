@@ -42,6 +42,7 @@ class HealthExamination extends Model
         'abdomen',
         'deformities',
         'others_specify',
+        'medications',
     ];
 
     protected function casts(): array
@@ -55,6 +56,7 @@ class HealthExamination extends Model
             'deworming_july' => 'boolean',
             'deworming_january' => 'boolean',
             'iron_supplementation' => 'boolean',
+            'medications' => 'string',
         ];
     }
 

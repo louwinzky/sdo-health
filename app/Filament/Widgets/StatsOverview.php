@@ -2,8 +2,8 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\HealthExamination;
 use App\Models\HealthProgram;
-use App\Models\HealthRecord;
 use App\Models\School;
 use App\Models\Student;
 use Filament\Widgets\StatsOverviewWidget;
@@ -28,12 +28,12 @@ class StatsOverview extends StatsOverviewWidget
         }
 
         $studentQuery = Student::query();
-        $recordQuery = HealthRecord::query();
+        $examinationQuery = HealthExamination::query();
         $programQuery = HealthProgram::query();
 
         if (! $isSdoAdmin && $schoolId) {
             $studentQuery->where('school_id', $schoolId);
-            $recordQuery->whereHas('student', fn ($q) => $q->where('school_id', $schoolId));
+            $examinationQuery->whereHas('student', fn ($q) => $q->where('school_id', $schoolId));
             $programQuery->where('school_id', $schoolId);
         }
 
@@ -43,7 +43,7 @@ class StatsOverview extends StatsOverviewWidget
             ->chart([7, 3, 4, 5, 6, 3, 5, 3])
             ->color('success');
 
-        $stats[] = Stat::make('Health Records', $recordQuery->count())
+        $stats[] = Stat::make('Health Examinations', $examinationQuery->count())
             ->description('Total medical checkups')
             ->descriptionIcon('heroicon-m-heart')
             ->color('danger');

@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Absence;
+use App\Models\HealthExamination;
 use App\Models\HealthProgram;
-use App\Models\HealthRecord;
 use App\Models\MedicalHistory;
 use App\Models\School;
 use App\Models\Student;
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        if (!$admin->hasRole('sdo_admin')) {
+        if (! $admin->hasRole('sdo_admin')) {
             $admin->assignRole('sdo_admin');
         }
 
@@ -83,10 +83,10 @@ class DatabaseSeeder extends Seeder
                     'student_id' => $student->id,
                 ]);
 
-                // Add Health Records
-                HealthRecord::factory(rand(1, 2))->create([
+                // Add Health Examinations
+                HealthExamination::factory(rand(1, 2))->create([
                     'student_id' => $student->id,
-                    'recorded_by' => $coordinator->id,
+                    'examined_by' => $coordinator->id,
                 ]);
 
                 // Add Vaccinations

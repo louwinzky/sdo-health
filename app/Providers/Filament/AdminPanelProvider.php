@@ -5,7 +5,6 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\AbsenceResource;
 use App\Filament\Resources\HealthProgramResource;
-use App\Filament\Resources\HealthRecordResource;
 use App\Filament\Resources\SchoolClinicResource;
 use App\Filament\Resources\SchoolResource;
 use App\Filament\Resources\StudentResource;
@@ -51,7 +50,6 @@ class AdminPanelProvider extends PanelProvider
             ->resources([
                 SchoolResource::class,
                 StudentResource::class,
-                HealthRecordResource::class,
                 VaccinationResource::class,
                 SchoolClinicResource::class,
                 HealthProgramResource::class,

@@ -2,14 +2,15 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\HealthRecord;
+use App\Helpers\HealthLegend;
+use App\Models\HealthExamination;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class RecentHealthRecords extends TableWidget
+class RecentHealthExaminations extends TableWidget
 {
     protected static ?int $sort = 2;
 
@@ -23,8 +24,8 @@ class RecentHealthRecords extends TableWidget
 
         return $table
             ->query(
-                HealthRecord::query()
-                    ->latest()
+                HealthExamination::query()
+                    ->latest('date_of_examination')
                     ->when(! $isSdoAdmin && $schoolId, function (Builder $query) use ($schoolId) {
                         $query->whereHas('student', fn ($q) => $q->where('school_id', $schoolId));
                     })
@@ -34,24 +35,28 @@ class RecentHealthRecords extends TableWidget
                 TextColumn::make('student.full_name')
                     ->label('Student')
                     ->searchable(),
-                TextColumn::make('bmi')
-                    ->label('BMI')
-                    ->numeric(1),
-                TextColumn::make('bmi_category')
-                    ->label('Category')
+                TextColumn::make('height_cm')
+                    ->label('Height')
+                    ->numeric(2),
+                TextColumn::make('weight_kg')
+                    ->label('Weight')
+                    ->numeric(2),
+                TextColumn::make('ns_bmi_for_age')
+                    ->label('BMI-for-Age')
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => HealthLegend::label('ns_bmi', $state))
                     ->color(fn (string $state): string => match ($state) {
-                        'Underweight' => 'warning',
-                        'Normal' => 'success',
-                        'Overweight' => 'danger',
-                        'Obese' => 'danger',
+                        'c' => 'danger',
+                        'a' => 'success',
+                        'd' => 'warning',
+                        'e' => 'danger',
                         default => 'gray',
                     }),
-                TextColumn::make('record_date')
+                TextColumn::make('date_of_examination')
                     ->date()
                     ->sortable(),
-                TextColumn::make('recordedBy.name')
-                    ->label('Recorded By'),
+                TextColumn::make('examinedBy.name')
+                    ->label('Examined By'),
             ]);
     }
 }

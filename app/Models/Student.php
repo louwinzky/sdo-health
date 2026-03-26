@@ -37,11 +37,6 @@ class Student extends Model
         return $this->belongsTo(School::class);
     }
 
-    public function healthRecords(): HasMany
-    {
-        return $this->hasMany(HealthRecord::class);
-    }
-
     public function vaccinations(): HasMany
     {
         return $this->hasMany(Vaccination::class);
