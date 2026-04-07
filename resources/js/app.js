@@ -1,9 +1,4 @@
-import Alpine from 'alpinejs';
-import Flux from '@livewire/flux';
-
-// Make Alpine available globally for Livewire to use
-window.Alpine = Alpine;
-
-// Start Alpine for non-Livewire pages (like login)
-// Flux components will be registered by the Flux import above
-Alpine.start();
+// Note: Alpine.js and Flux are now loaded via CDN in blade templates
+// This file is kept for reference but no longer used in the build process
+// Alpine is initialized automatically when loaded via CDN
+// Flux components are registered automatically when Flux CDN is loaded
