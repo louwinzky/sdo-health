@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -20,14 +21,15 @@ class UserForm
                     ->label('Email address')
                     ->email()
                     ->required(),
-                Select::make('role')
-                    ->options([
-                        'sdo_admin' => 'Sdo admin',
-                        'principal' => 'Principal',
-                        'health_coordinator' => 'Health coordinator',
-                    ])
-                    ->default('health_coordinator')
+                Select::make('roles')
+                    ->label('Roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
                     ->required(),
+                CheckboxList::make('permissions')
+                    ->label('Permissions')
+                    ->relationship('permissions', 'name')
+                    ->columns(2),
                 DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
                     ->password()

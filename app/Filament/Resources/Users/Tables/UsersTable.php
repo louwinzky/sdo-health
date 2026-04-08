@@ -20,9 +20,10 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('EMAIL')
                     ->searchable(),
-                TextColumn::make('role')
-                    ->label('ROLE')
-                    ->badge(),
+                TextColumn::make('roles.name')
+                    ->label('ROLES')
+                    ->badge()
+                    ->listWithLineBreaks(),
                 TextColumn::make('email_verified_at')
                     ->label('EMAIL VERIFIED AT')
                     ->dateTime()
