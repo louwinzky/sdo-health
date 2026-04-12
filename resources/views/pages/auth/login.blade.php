@@ -41,7 +41,19 @@
             </div>
 
             <!-- Remember Me -->
-            <flux:checkbox name="remember" value="1" :label="__('Remember me')" :checked="old('remember')" />
+            <div class="flex items-center">
+                <input 
+                    type="checkbox" 
+                    name="remember" 
+                    id="remember" 
+                    value="1" 
+                    {{ old('remember') ? 'checked' : '' }}
+                    class="w-5 h-5 rounded border-gray-300 dark:border-gray-600 accent-green-500 focus:ring-green-500 dark:focus:ring-green-500 cursor-pointer"
+                >
+                <label for="remember" class="ml-2 block text-sm text-gray-900 dark:text-gray-100">
+                    {{ __('Remember me') }}
+                </label>
+            </div>
 
             <div class="flex items-center justify-end">
                 <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">

@@ -22,7 +22,16 @@
         }
     }
 </script>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 <link rel="stylesheet" href="{{ asset('css/flux.css') }}">
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@@3.x.x/dist/cdn.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@@livewire/flux@@1.x.x/dist/flux.min.js" defer></script>
-@fluxAppearance
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+    (function () {
+        var appearance = localStorage.getItem('appearance');
+        if (appearance === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    })();
+</script>

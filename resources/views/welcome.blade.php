@@ -14,7 +14,6 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
 
         <!-- Scripts & Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
@@ -38,9 +37,11 @@
                 }
             }
         </script>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/flux.css') }}">
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@@3.x.x/dist/cdn.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@@livewire/flux@@1.x.x/dist/flux.min.js" defer></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/%40livewire/flux@1.x.x/dist/flux.min.js" defer></script>
+        @fluxAppearance
     </head>
     <body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased">
         <div class="relative min-h-screen flex flex-col">
@@ -52,7 +53,20 @@
                         <span class="text-xl font-bold tracking-tight">School Division Office - Legazpi</span>
                     </div>
 
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4" x-data="{ dark: localStorage.getItem('appearance') === 'dark' }" x-init="document.documentElement.classList.toggle('dark', dark); $watch('dark', value => { localStorage.setItem('appearance', value ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', value); })">
+                        <!-- Dark Mode Toggle -->
+                        <button 
+                            @click="dark = !dark"
+                            class="p-3 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors cursor-pointer z-10"
+                            aria-label="Toggle dark mode"
+                        >
+                            <svg x-show="dark" class="w-6 h-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <svg x-show="!dark" class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </button>
                         @auth
                             <a href="{{ route('filament.admin.pages.dashboard') }}" class="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all">
                                 Go to Dashboard
