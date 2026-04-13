@@ -15,9 +15,9 @@
                     </a>
                     <!-- Dark Mode Toggle -->
                     <button 
-                        x-data="{ dark: localStorage.getItem('appearance') === 'dark' }"
-                        x-init="document.documentElement.classList.toggle('dark', dark)"
-                        @click="dark = !dark; localStorage.setItem('appearance', dark ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', dark)"
+                        x-data="{ dark: localStorage.getItem('appearance') === 'dark' || localStorage.getItem('theme') === 'dark' }"
+                        x-init="document.documentElement.classList.toggle('dark', dark); if (dark) { localStorage.setItem('appearance', 'dark'); localStorage.setItem('theme', 'dark'); } else { localStorage.setItem('appearance', 'light'); localStorage.setItem('theme', 'light'); }"
+                        @click="dark = !dark; localStorage.setItem('appearance', dark ? 'dark' : 'light'); localStorage.setItem('theme', dark ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', dark)"
                         class="p-3 rounded-lg bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors cursor-pointer z-10"
                         aria-label="Toggle dark mode"
                     >

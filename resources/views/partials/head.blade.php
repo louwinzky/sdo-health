@@ -28,7 +28,15 @@
 <script>
     (function () {
         var appearance = localStorage.getItem('appearance');
-        if (appearance === 'dark') {
+        var theme = localStorage.getItem('theme');
+
+        if (appearance === 'dark' || appearance === 'light') {
+            localStorage.setItem('theme', appearance);
+        } else if (theme === 'dark' || theme === 'light') {
+            localStorage.setItem('appearance', theme);
+        }
+
+        if (localStorage.getItem('appearance') === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');

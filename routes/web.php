@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::redirect('/admin/login', '/login');
 Route::view('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {

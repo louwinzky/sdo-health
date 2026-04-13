@@ -18,6 +18,6 @@ class LogoutResponse implements FilamentLogoutResponse, LogoutResponseContract
     {
         return $request->wantsJson()
             ? new JsonResponse('', 204)
-            : redirect('/');
+            : redirect()->route('login');
     }
 }

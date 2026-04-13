@@ -53,7 +53,7 @@
                         <span class="text-xl font-bold tracking-tight">School Division Office - Legazpi</span>
                     </div>
 
-                    <div class="flex items-center gap-4" x-data="{ dark: localStorage.getItem('appearance') === 'dark' }" x-init="document.documentElement.classList.toggle('dark', dark); $watch('dark', value => { localStorage.setItem('appearance', value ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', value); })">
+                    <div class="flex items-center gap-4" x-data="{ dark: localStorage.getItem('appearance') === 'dark' || localStorage.getItem('theme') === 'dark' }" x-init="document.documentElement.classList.toggle('dark', dark); $watch('dark', value => { localStorage.setItem('appearance', value ? 'dark' : 'light'); localStorage.setItem('theme', value ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', value); })">
                         <!-- Dark Mode Toggle -->
                         <button 
                             @click="dark = !dark"
@@ -87,7 +87,7 @@
             <main class="relative isolate grow">
                 <!-- Background Decoration -->
                 <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-                    <div class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+                    <div class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-slate-300 to-slate-500 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
                 </div>
 
                 <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <h1 class="mt-10 text-5xl font-bold tracking-tight sm:text-7xl">
-                            SDO - Legazpi <span class="text-blue-600 dark:text-blue-400">Health System</span>
+                            SDO - Legazpi <span class="text-slate-900 dark:text-slate-300">Health System</span>
                         </h1>
                         <p class="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-400">
                             A centralized platform for managing student health records, vaccinations, and health programs within the Division of Legazpi City. Ensuring every student's health and wellness is prioritized.
@@ -118,19 +118,19 @@
                     </div>
                     <div class="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
                         <div class="relative mx-auto w-full max-w-lg">
-                            <div class="absolute top-0 -left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob dark:bg-blue-900"></div>
-                            <div class="absolute top-0 -right-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 dark:bg-purple-900"></div>
-                            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 dark:bg-pink-900"></div>
+                            <div class="absolute top-0 -left-4 w-72 h-72 bg-slate-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob dark:bg-slate-800"></div>
+                            <div class="absolute top-0 -right-4 w-72 h-72 bg-zinc-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 dark:bg-zinc-800"></div>
+                            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-stone-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 dark:bg-stone-800"></div>
                             <div class="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-8 border border-slate-200 dark:border-slate-800 opacity-80">
                                 <div class="flex items-center gap-4 mb-6">
-                                    <div class="size-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                    <div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                         </svg>
                                     </div>
                                     <div>
                                         <h3 class="font-bold text-slate-900 dark:text-white">Health Dashboard</h3>
-                                        <p class="text-sm text-slate-500">Real-time monitoring</p>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">Real-time monitoring</p>
                                     </div>
                                 </div>
                                 <div class="space-y-4">
@@ -138,9 +138,9 @@
                                     <div class="h-4 bg-slate-100 dark:bg-slate-800 rounded w-full"></div>
                                     <div class="h-4 bg-slate-100 dark:bg-slate-800 rounded w-5/6"></div>
                                     <div class="grid grid-cols-3 gap-4 mt-6">
-                                        <div class="h-20 bg-blue-50 dark:bg-blue-950 rounded-lg"></div>
-                                        <div class="h-20 bg-green-50 dark:bg-green-950 rounded-lg"></div>
-                                        <div class="h-20 bg-purple-50 dark:bg-purple-950 rounded-lg"></div>
+                                        <div class="h-20 bg-slate-50 dark:bg-slate-800 rounded-lg"></div>
+                                        <div class="h-20 bg-slate-50 dark:bg-slate-800 rounded-lg"></div>
+                                        <div class="h-20 bg-slate-50 dark:bg-slate-800 rounded-lg"></div>
                                     </div>
                                 </div>
                             </div>
