@@ -1,14 +1,72 @@
+@props([
+    'livewire' => null,
+])
+
+@php
+    $renderHookScopes = $livewire?->getRenderHookScopes();
+@endphp
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="fi">
+<html
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    dir="{{ __('filament-panels::layout.direction') ?? 'ltr' }}"
+    @class([
+        'fi',
+        'dark' => filament()->hasDarkMode() && filament()->hasDarkModeForced(),
+    ])
+>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::HEAD_START, scopes: $renderHookScopes) }}
 
-        <title>{{ $title ?? filament()->getTitle() }}</title>
+        <meta charset="utf-8" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {{ filament()->getFaviconHtml() }}
-        {{ filament()->getMetaHtml() }}
+        @if ($favicon = filament()->getFavicon())
+            <link rel="icon" href="{{ $favicon }}" />
+        @endif
 
+        @php
+            $title = trim(strip_tags($livewire?->getTitle() ?? ''));
+            $brandName = trim(strip_tags(filament()->getBrandName()));
+        @endphp
+
+        <title>
+            {{ filled($title) ? $title : null }}
+            {{ filled($brandName) && filled($title) ? ' - ' : null }}
+            {{ filled($brandName) ? $brandName : null }}
+        </title>
+
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::STYLES_BEFORE, scopes: $renderHookScopes) }}
+
+        <style>
+            [x-cloak=''],
+            [x-cloak='x-cloak'],
+            [x-cloak='1'] {
+                display: none !important;
+            }
+
+            [x-cloak='inline-flex'] {
+                display: inline-flex !important;
+            }
+
+            @media (max-width: 1023px) {
+                [x-cloak='-lg'] {
+                    display: none !important;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                [x-cloak='lg'] {
+                    display: none !important;
+                }
+            }
+        </style>
+
+        @filamentStyles
+
+        {{ filament()->getTheme()->getHtml() }}
+        {{ filament()->getFontPreloadHtml() }}
         {{ filament()->getMonoFontPreloadHtml() }}
         {{ filament()->getSerifFontPreloadHtml() }}
         {{ filament()->getFontHtml() }}
