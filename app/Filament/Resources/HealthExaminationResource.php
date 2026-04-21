@@ -21,13 +21,9 @@ class HealthExaminationResource extends Resource
 {
     protected static ?string $model = HealthExamination::class;
 
-<<<<<<< Updated upstream
-    protected static ?string $policy = \App\Policies\HealthExaminationPolicy::class;
-=======
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $policy = HealthExaminationPolicy::class;
->>>>>>> Stashed changes
 
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 

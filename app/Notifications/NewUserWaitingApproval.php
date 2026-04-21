@@ -46,11 +46,7 @@ class NewUserWaitingApproval extends Notification
             ->actions([
                 Action::make('view')
                     ->button()
-<<<<<<< Updated upstream
-                    ->url(\App\Filament\Resources\UserApprovalResource::getUrl('index')),
-=======
                     ->url(UserResource::getUrl('index')),
->>>>>>> Stashed changes
             ])
             ->getDatabaseMessage();
     }

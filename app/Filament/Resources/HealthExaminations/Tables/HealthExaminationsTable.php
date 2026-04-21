@@ -89,17 +89,11 @@ class HealthExaminationsTable
                     ->options($map['ns_height']),
             ])
             ->recordActions([
-<<<<<<< Updated upstream
-                \Filament\Actions\ViewAction::make(),
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
-=======
                 ViewAction::make(),
                 EditAction::make()
                     ->visible(fn () => auth()->user()->hasRole('sdo_admin') || auth()->user()->hasPermissionTo('manage_health_records')),
                 DeleteAction::make()
                     ->visible(fn () => auth()->user()->hasRole('sdo_admin') || auth()->user()->hasPermissionTo('manage_health_records')),
->>>>>>> Stashed changes
             ])
             ->bulkActions([
                 BulkActionGroup::make([

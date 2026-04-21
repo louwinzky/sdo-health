@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-/* Custom Styles */
-=======
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,8 +8,6 @@
         color-scheme: dark;
     }
 }
-
->>>>>>> Stashed changes
 /* Card Component */
 .card {
     background-color: white;
@@ -22,14 +17,9 @@
     padding: 1.5rem;
 }
 
-<<<<<<< Updated upstream
-.dark .card {
+[data-theme="dark"] .card {
     background-color: rgb(24 24 27);
     border-color: rgb(39 39 42);
-=======
-[data-theme="dark"] .card {
-    @apply bg-zinc-900 border-zinc-800;
->>>>>>> Stashed changes
 }
 
 /* Custom CSS to fix Filament Admin Panel gap */

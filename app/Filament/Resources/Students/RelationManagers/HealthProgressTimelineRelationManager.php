@@ -17,11 +17,8 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-<<<<<<< Updated upstream
 use Illuminate\Support\HtmlString;
-=======
 use Illuminate\Database\Eloquent\Model;
->>>>>>> Stashed changes
 
 class HealthProgressTimelineRelationManager extends RelationManager
 {

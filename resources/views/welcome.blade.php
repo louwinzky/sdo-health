@@ -6,11 +6,6 @@
 
         <title>SDO Legazpi Health System</title>
 
-<<<<<<< Updated upstream
-        @include('partials.head')
-        <script src="https://cdn.jsdelivr.net/npm/%40livewire/flux@1.x.x/dist/flux.min.js" defer></script>
-        @fluxAppearance
-=======
         <link rel="icon" href="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png" type="image/png">
         <link rel="apple-touch-icon" href="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png">
 
@@ -32,7 +27,7 @@
                 }
             }
         </script>
-        <link rel="stylesheet" href="/css/flux.css">
+        <link rel="stylesheet" href="{{ asset('css/flux.css') }}">
         <script>
             // Check for saved user preference, if any, on load of the website
             if (localStorage.getItem('theme-color')) {
@@ -48,7 +43,6 @@
                 localStorage.setItem('theme-color', newTheme);
             }
         </script>
->>>>>>> Stashed changes
     </head>
     <body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased">
         <div class="relative min-h-screen flex flex-col">
@@ -60,20 +54,6 @@
                         <span class="text-xl font-bold tracking-tight">School Division Office - Legazpi</span>
                     </div>
 
-<<<<<<< Updated upstream
-                    <div class="flex items-center gap-4" x-data="{ dark: localStorage.getItem('appearance') === 'dark' || localStorage.getItem('theme') === 'dark' }" x-init="document.documentElement.classList.toggle('dark', dark); $watch('dark', value => { localStorage.setItem('appearance', value ? 'dark' : 'light'); localStorage.setItem('theme', value ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', value); })">
-                        <!-- Dark Mode Toggle -->
-                        <button 
-                            @click="dark = !dark"
-                            class="p-3 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors cursor-pointer z-10"
-                            aria-label="Toggle dark mode"
-                        >
-                            <svg x-show="dark" class="w-6 h-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                            <svg x-show="!dark" class="w-6 h-6 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-=======
                     <div class="flex items-center gap-4">
                         <!-- Dark Mode Toggle -->
                         <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" aria-label="Toggle dark mode">
@@ -82,7 +62,6 @@
                             </svg>
                             <svg class="w-5 h-5 text-yellow-400 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
->>>>>>> Stashed changes
                             </svg>
                         </button>
                         @auth

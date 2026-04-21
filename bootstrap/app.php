@@ -12,13 +12,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-<<<<<<< Updated upstream
-        //
-=======
         $middleware->web(append: [
             RedirectIfUnapproved::class,
         ]);
->>>>>>> Stashed changes
+        
+        $middleware->alias([
+            'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+            'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -20,7 +20,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flux@2.4.0/dist/flux.min.css">
+    <link rel="stylesheet" href="{{ asset('css/flux.css') }}">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
     <style>
         .card {
@@ -44,7 +44,7 @@
         <div class="w-full max-w-md">
             <!-- Logo -->
             <div class="text-center mb-8">
-                <img src="/images/sdo-logo.png" alt="SDO Logo" class="h-24 mx-auto mb-4">
+                <img src="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png" alt="SDO Logo" class="h-24 mx-auto mb-4">
                 <h1 class="text-3xl font-bold text-slate-800">SDO Health</h1>
                 <p class="text-slate-600 mt-1 font-medium">Legazpi City Health System</p>
             </div>

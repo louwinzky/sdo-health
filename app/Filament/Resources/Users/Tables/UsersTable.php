@@ -50,16 +50,12 @@ class UsersTable
                     ->searchable(),
             ])
             ->filters([
-<<<<<<< Updated upstream
-                //
-=======
                 SelectFilter::make('is_approved')
                     ->label('Status')
                     ->options([
                         '0' => 'Pending',
                         '1' => 'Approved',
                     ]),
->>>>>>> Stashed changes
             ])
             ->recordActions([
                 EditAction::make(),

@@ -13,11 +13,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-<<<<<<< Updated upstream
-use Illuminate\Support\HtmlString;
-=======
 use Illuminate\Database\Eloquent\Model;
->>>>>>> Stashed changes
+use Illuminate\Support\HtmlString;
 
 class HealthExaminationsRelationManager extends RelationManager
 {

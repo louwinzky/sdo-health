@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SDO Legazpi Health System</title>
+
+        <link rel="icon" href="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png" type="image/png">
+        <link rel="apple-touch-icon" href="https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png">
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
+
+        <!-- Scripts & Styles -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: ['class', '[data-theme="dark"]'],
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Instrument Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="/css/flux.css">
+        <script>
+            // Check for saved user preference, if any, on load of the website
+            if (localStorage.getItem('theme-color')) {
+                document.documentElement.setAttribute('data-theme', localStorage.getItem('theme-color'));
+            }
+
+            function toggleTheme() {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme-color', newTheme);
+            }
+        </script>
+    </head>

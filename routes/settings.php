@@ -15,12 +15,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::livewire('settings/two-factor', 'pages::settings.two-factor')
         ->middleware(
-            when(
-                Features::canManageTwoFactorAuthentication()
-                && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
-                ['password.confirm'],
-                [],
-            ),
+            Features::canManageTwoFactorAuthentication()
+            && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')
+                ? ['password.confirm']
+                : []
         )
         ->name('two-factor.show');
 });

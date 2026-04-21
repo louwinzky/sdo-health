@@ -11,11 +11,8 @@ use App\Filament\Resources\Vaccinations\Schemas\VaccinationForm;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-<<<<<<< Updated upstream
 use Filament\Resources\RelationManagers\RelationManager;
-=======
 use Illuminate\Database\Eloquent\Model;
->>>>>>> Stashed changes
 
 class VaccinationsRelationManager extends RelationManager
 {
