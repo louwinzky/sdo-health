@@ -6,6 +6,7 @@ use App\Filament\Resources\Schools\Pages\ListSchools;
 use App\Filament\Resources\Schools\Schemas\SchoolForm;
 use App\Filament\Resources\Schools\Tables\SchoolsTable;
 use App\Models\School;
+use App\Policies\SchoolPolicy;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -16,7 +17,7 @@ class SchoolResource extends Resource
 {
     protected static ?string $model = School::class;
 
-    protected static ?string $policy = \App\Policies\SchoolPolicy::class;
+    protected static ?string $policy = SchoolPolicy::class;
 
     protected static UnitEnum|string|null $navigationGroup = 'School Management';
 

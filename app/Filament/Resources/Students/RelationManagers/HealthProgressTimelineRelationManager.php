@@ -17,7 +17,11 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+<<<<<<< Updated upstream
 use Illuminate\Support\HtmlString;
+=======
+use Illuminate\Database\Eloquent\Model;
+>>>>>>> Stashed changes
 
 class HealthProgressTimelineRelationManager extends RelationManager
 {
@@ -27,7 +31,7 @@ class HealthProgressTimelineRelationManager extends RelationManager
 
     private array $declineMap = [];
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return 'Health Progress';
     }

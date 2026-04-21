@@ -2,7 +2,9 @@
 
 namespace App\Notifications;
 
+use App\Filament\Resources\UserResource;
 use App\Models\User;
+use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -42,9 +44,13 @@ class NewUserWaitingApproval extends Notification
             ->icon('heroicon-o-user-plus')
             ->iconColor('success')
             ->actions([
-                \Filament\Notifications\Actions\Action::make('view')
+                Action::make('view')
                     ->button()
+<<<<<<< Updated upstream
                     ->url(\App\Filament\Resources\UserApprovalResource::getUrl('index')),
+=======
+                    ->url(UserResource::getUrl('index')),
+>>>>>>> Stashed changes
             ])
             ->getDatabaseMessage();
     }

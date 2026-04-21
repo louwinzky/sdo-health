@@ -1,6 +1,13 @@
 <x-layouts::auth :title="__('Register')">
     <div class="flex flex-col gap-6">
+<<<<<<< Updated upstream
         <x-auth-header :title="__('Create account')" :description="__('Enter your details below to create your account')" />
+=======
+        <div class="text-center">
+            <h2 class="text-2xl font-bold text-slate-900">Create account</h2>
+            <p class="text-slate-500 mt-1 text-sm">Enter your details to get started</p>
+        </div>
+>>>>>>> Stashed changes
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
@@ -59,9 +66,15 @@
             </div>
         </form>
 
+<<<<<<< Updated upstream
         <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
             <span>{{ __('Already have an account?') }}</span>
             <flux:link :href="route('login')" wire:navigate="true">{{ __('Log in') }}</flux:link>
+=======
+        <div class="text-center text-sm text-slate-500 pt-2 border-t border-slate-200">
+            <span>Already have an account?</span>
+            <flux:link :href="route('login')" wire:navigate="true" class="font-semibold">{{ __('Sign in') }}</flux:link>
+>>>>>>> Stashed changes
         </div>
     </div>
 </x-layouts::auth>

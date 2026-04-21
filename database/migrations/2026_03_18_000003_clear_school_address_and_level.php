@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\School;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
         });
 
         // Clear the data
-        \App\Models\School::query()->update([
+        School::query()->update([
             'address' => null,
             'level' => null,
         ]);

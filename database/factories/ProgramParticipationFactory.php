@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\ProgramParticipation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProgramParticipation>
+ * @extends Factory<ProgramParticipation>
  */
 class ProgramParticipationFactory extends Factory
 {

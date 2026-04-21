@@ -1,8 +1,13 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\Filament\AdminPanelProvider;
+use App\Providers\FortifyServiceProvider;
+use Flux\FluxServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\AdminPanelProvider::class,
-    App\Providers\FortifyServiceProvider::class,
-    Flux\FluxServiceProvider::class,
+    AppServiceProvider::class,
+    AdminPanelProvider::class,
+    FortifyServiceProvider::class,
+    FluxServiceProvider::class,
 ];

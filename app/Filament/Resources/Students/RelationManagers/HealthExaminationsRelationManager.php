@@ -13,13 +13,17 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+<<<<<<< Updated upstream
 use Illuminate\Support\HtmlString;
+=======
+use Illuminate\Database\Eloquent\Model;
+>>>>>>> Stashed changes
 
 class HealthExaminationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'healthExaminations';
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return 'Health Examinations';
     }

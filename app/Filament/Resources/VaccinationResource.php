@@ -6,6 +6,7 @@ use App\Filament\Resources\Vaccinations\Pages\ListVaccinations;
 use App\Filament\Resources\Vaccinations\Schemas\VaccinationForm;
 use App\Filament\Resources\Vaccinations\Tables\VaccinationsTable;
 use App\Models\Vaccination;
+use App\Policies\VaccinationPolicy;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,7 +18,7 @@ class VaccinationResource extends Resource
 {
     protected static ?string $model = Vaccination::class;
 
-    protected static ?string $policy = \App\Policies\VaccinationPolicy::class;
+    protected static ?string $policy = VaccinationPolicy::class;
 
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 

@@ -14,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use BackedEnum;
 use UnitEnum;
@@ -51,7 +52,7 @@ class RolePermissionResource extends Resource
                     ->components([
                         CheckboxList::make('permissions')
                             ->relationship('permissions', 'name')
-                            ->options(\Spatie\Permission\Models\Permission::query()
+                            ->options(Permission::query()
                                 ->pluck('name', 'id'))
                             ->columns(2)
                             ->descriptions([

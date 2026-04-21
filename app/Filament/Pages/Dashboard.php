@@ -2,11 +2,12 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\StudentResource;
 use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard
 {
-    protected static string $resource = \App\Filament\Resources\StudentResource::class;
+    protected static string $resource = StudentResource::class;
 
     public function getHeaderWidgets(): array
     {

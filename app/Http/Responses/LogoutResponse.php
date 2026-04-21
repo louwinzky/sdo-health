@@ -4,15 +4,17 @@ namespace App\Http\Responses;
 
 use Filament\Auth\Http\Responses\Contracts\LogoutResponse as FilamentLogoutResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
+use Symfony\Component\HttpFoundation\Response;
 
 class LogoutResponse implements FilamentLogoutResponse, LogoutResponseContract
 {
     /**
      * Create an HTTP response that represents the object.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  Request  $request
+     * @return Response
      */
     public function toResponse($request)
     {

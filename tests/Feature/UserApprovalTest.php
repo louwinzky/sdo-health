@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Actions\Fortify\CreateNewUser;
+use App\Models\School;
 use App\Models\User;
 use App\Notifications\NewUserWaitingApproval;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -68,9 +70,9 @@ test('new user registration triggers notification to admins', function () {
     ]);
     $admin->assignRole('sdo_admin');
 
-    $school = \App\Models\School::factory()->create();
+    $school = School::factory()->create();
 
-    $creator = new \App\Actions\Fortify\CreateNewUser;
+    $creator = new CreateNewUser;
     $user = $creator->create([
         'name' => 'New User',
         'email' => 'new@test.com',

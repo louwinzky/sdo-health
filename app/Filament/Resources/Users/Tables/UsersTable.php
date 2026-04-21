@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -49,7 +50,16 @@ class UsersTable
                     ->searchable(),
             ])
             ->filters([
+<<<<<<< Updated upstream
                 //
+=======
+                SelectFilter::make('is_approved')
+                    ->label('Status')
+                    ->options([
+                        '0' => 'Pending',
+                        '1' => 'Approved',
+                    ]),
+>>>>>>> Stashed changes
             ])
             ->recordActions([
                 EditAction::make(),

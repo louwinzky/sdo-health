@@ -11,13 +11,17 @@ use App\Filament\Resources\Vaccinations\Schemas\VaccinationForm;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+<<<<<<< Updated upstream
 use Filament\Resources\RelationManagers\RelationManager;
+=======
+use Illuminate\Database\Eloquent\Model;
+>>>>>>> Stashed changes
 
 class VaccinationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'vaccinations';
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return 'Vaccination Records';
     }

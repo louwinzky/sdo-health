@@ -6,6 +6,7 @@ use App\Filament\Resources\HealthPrograms\Pages\ListHealthPrograms;
 use App\Filament\Resources\HealthPrograms\Schemas\HealthProgramForm;
 use App\Filament\Resources\HealthPrograms\Tables\HealthProgramsTable;
 use App\Models\HealthProgram;
+use App\Policies\HealthProgramPolicy;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -16,7 +17,7 @@ class HealthProgramResource extends Resource
 {
     protected static ?string $model = HealthProgram::class;
 
-    protected static ?string $policy = \App\Policies\HealthProgramPolicy::class;
+    protected static ?string $policy = HealthProgramPolicy::class;
 
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 

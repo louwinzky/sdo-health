@@ -2,10 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\HealthExaminations\Pages\CreateHealthExamination;
+use App\Filament\Resources\HealthExaminations\Pages\EditHealthExamination;
 use App\Filament\Resources\HealthExaminations\Pages\ListHealthExaminations;
+use App\Filament\Resources\HealthExaminations\Pages\ViewHealthExamination;
 use App\Filament\Resources\HealthExaminations\Schemas\HealthExaminationForm;
 use App\Filament\Resources\HealthExaminations\Tables\HealthExaminationsTable;
 use App\Models\HealthExamination;
+use App\Policies\HealthExaminationPolicy;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -17,7 +21,13 @@ class HealthExaminationResource extends Resource
 {
     protected static ?string $model = HealthExamination::class;
 
+<<<<<<< Updated upstream
     protected static ?string $policy = \App\Policies\HealthExaminationPolicy::class;
+=======
+    protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?string $policy = HealthExaminationPolicy::class;
+>>>>>>> Stashed changes
 
     protected static UnitEnum|string|null $navigationGroup = 'Health Services';
 
@@ -59,9 +69,9 @@ class HealthExaminationResource extends Resource
     {
         return [
             'index' => ListHealthExaminations::route('/'),
-            'create' => \App\Filament\Resources\HealthExaminations\Pages\CreateHealthExamination::route('/create'),
-            'view' => \App\Filament\Resources\HealthExaminations\Pages\ViewHealthExamination::route('/{record}'),
-            'edit' => \App\Filament\Resources\HealthExaminations\Pages\EditHealthExamination::route('/{record}/edit'),
+            'create' => CreateHealthExamination::route('/create'),
+            'view' => ViewHealthExamination::route('/{record}'),
+            'edit' => EditHealthExamination::route('/{record}/edit'),
         ];
     }
 }

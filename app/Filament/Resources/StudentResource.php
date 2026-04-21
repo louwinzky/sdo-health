@@ -6,9 +6,14 @@ use App\Filament\Resources\Students\Pages\CreateStudent;
 use App\Filament\Resources\Students\Pages\EditStudent;
 use App\Filament\Resources\Students\Pages\ListStudents;
 use App\Filament\Resources\Students\Pages\ViewStudent;
+use App\Filament\Resources\Students\RelationManagers\HealthExaminationsRelationManager;
+use App\Filament\Resources\Students\RelationManagers\HealthProgressTimelineRelationManager;
+use App\Filament\Resources\Students\RelationManagers\MedicalHistoryRelationManager;
+use App\Filament\Resources\Students\RelationManagers\VaccinationsRelationManager;
 use App\Filament\Resources\Students\Schemas\StudentForm;
 use App\Filament\Resources\Students\Tables\StudentsTable;
 use App\Models\Student;
+use App\Policies\StudentPolicy;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -20,7 +25,7 @@ class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
 
-    protected static ?string $policy = \App\Policies\StudentPolicy::class;
+    protected static ?string $policy = StudentPolicy::class;
 
     protected static UnitEnum|string|null $navigationGroup = 'Student Management';
 
@@ -54,10 +59,10 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            \App\Filament\Resources\Students\RelationManagers\MedicalHistoryRelationManager::class,
-            \App\Filament\Resources\Students\RelationManagers\HealthExaminationsRelationManager::class,
-            \App\Filament\Resources\Students\RelationManagers\HealthProgressTimelineRelationManager::class,
-            \App\Filament\Resources\Students\RelationManagers\VaccinationsRelationManager::class,
+            MedicalHistoryRelationManager::class,
+            HealthExaminationsRelationManager::class,
+            HealthProgressTimelineRelationManager::class,
+            VaccinationsRelationManager::class,
         ];
     }
 
