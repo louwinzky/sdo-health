@@ -2,6 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\AbsenceResource;
+use App\Filament\Resources\HealthProgramResource;
+use App\Filament\Resources\RolePermissionResource;
+use App\Filament\Resources\SchoolClinicResource;
+use App\Filament\Resources\SchoolResource;
+use App\Filament\Resources\StudentResource;
+use App\Filament\Resources\VaccinationResource;
+use App\Http\Middleware\RedirectIfUnapproved;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -10,14 +18,6 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use App\Filament\Resources\SchoolResource;
-use App\Filament\Resources\StudentResource;
-use App\Filament\Resources\HealthRecordResource;
-use App\Filament\Resources\VaccinationResource;
-use App\Filament\Resources\SchoolClinicResource;
-use App\Filament\Resources\HealthProgramResource;
-use App\Filament\Resources\AbsenceResource;
-use App\Filament\Resources\RolePermissionResource;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -34,6 +34,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(fn () => redirect()->route('login'))
+            ->brandName('SDO Health')
+            ->brandLogo('https://sdolegazpicity.com/wp-content/uploads/2025/12/cropped-LOGO-sdo-leg-1-1.png')
+            ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -53,8 +56,8 @@ class AdminPanelProvider extends PanelProvider
                 RolePermissionResource::class,
             ])
             ->widgets([
-                //AccountWidget::class,
-                //FilamentInfoWidget::class,
+                // AccountWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -68,6 +71,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
+                RedirectIfUnapproved::class,
                 Authenticate::class,
             ]);
     }

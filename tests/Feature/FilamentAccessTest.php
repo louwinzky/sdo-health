@@ -4,18 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Role;
 
 use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
-
-beforeEach(function () {
-    // Setup roles
-    Role::create(['name' => 'health_coordinator']);
-    Role::create(['name' => 'sdo_admin']);
-    Role::create(['name' => 'principal']);
-});
 
 test('unapproved user is redirected from filament admin panel', function () {
     $user = User::factory()->create([
